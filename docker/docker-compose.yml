@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+
+  mongo:
+    image: minhacidadetransparente/mongo
+
+  security-api:
+    image: minhacidadetransparente/api
+    ports:
+      - "8001:80"
+    depends_on:
+      - mongo
+    volumes:
+      - /Users/jeanpinzon/workspace/minha-cidade-transparente/Api:/usr/src/app
+    environment:
+      - NODE_ENV=dev
+    command: npm install
+    command: npm start

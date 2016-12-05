@@ -1,0 +1,19 @@
+{
+  "name": "api-minha-cidade-transparente",
+  "scripts": {
+    "start": "node server",
+    "test": "node_modules/mocha/bin/mocha"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "q": "^1.4.1"
+  },
+  "devDependencies": {
+    "http-post": "^0.1.1",
+    "mocha": "^3.2.0",
+    "request": "^2.79.0",
+    "should": "^11.1.1",
+    "supertest": "^2.0.1"
+  }
+}
