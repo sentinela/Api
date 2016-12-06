@@ -1,24 +1,22 @@
-(() => {
-  'use strict';
+const expressConfig = () => {
 
-  let expressConfig = () => {
+  const express = require('express');
+  const bodyParser = require('body-parser');
 
-    const express = require('express');
-    const bodyParser =  require('body-parser');
+  const enableCorsHandler = require('../middlewares').enableCorsHandler;
+  const dailyRateRoute = require('../app/dailyRate').dailyRateRoute;
+  const biddingRoute = require('../app/bidding').biddingRoute;
 
-    const enableCorsHandler = require('../middlewares').enableCorsHandler;
-    const dailyRateRoute = require('../app/dailyRate').dailyRateRoute;
+  const app = express();
 
-    const app = express();
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json());
+  app.use(enableCorsHandler);
 
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
-    app.use(enableCorsHandler);
+  dailyRateRoute.config(app);
+  biddingRoute.config(app);
 
-    dailyRateRoute.config(app);
+  return app;
+};
 
-    return app;
-  };
-
-  module.exports = expressConfig();
-})();
+module.exports = expressConfig();

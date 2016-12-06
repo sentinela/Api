@@ -1,7 +1,3 @@
-(() => {
-  'use strict';
-
-  module.exports = {
-    port: 8002
-  };
-})();
+module.exports = {
+  port: 8002
+};

@@ -1,16 +1,10 @@
-(() => {
-  'use strict';
+const messageType = require('./messageType');
+const Message = require('./Message');
 
-  var messageType = require('./messageType');
-  var Message = require('./Message');
-
-  class Success extends Message {
-
-    constructor(messages) {
-      super(messageType.success, messages);
-    }
+class Success extends Message {
+  constructor(messages) {
+    super(messageType.success, messages);
   }
+}
 
-  module.exports = Success;
-
-})();
+module.exports = Success;

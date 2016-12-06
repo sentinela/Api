@@ -1,8 +1,4 @@
-(() => {
-  'use strict';
-
-  module.exports = {
-    address: 'mongo',
-    port: 27017
-  };
-})();
+module.exports = {
+  address: 'mongo',
+  port: 27017
+};

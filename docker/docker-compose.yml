@@ -5,14 +5,14 @@ services:
   mongo:
     image: minhacidadetransparente/mongo
 
-  security-api:
+  api:
     image: minhacidadetransparente/api
     ports:
       - "8001:80"
     depends_on:
       - mongo
     volumes:
-      - /Users/jeanpinzon/workspace/minha-cidade-transparente/Api:/usr/src/app
+      - /Users/jeanbauer/Desktop/projects/sentinela/Api:/usr/src/app
     environment:
       - NODE_ENV=dev
     command: npm install
