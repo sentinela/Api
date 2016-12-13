@@ -12,7 +12,7 @@ services:
     depends_on:
       - mongo
     volumes:
-      - /Users/jeanbauer/Desktop/projects/sentinela/Api:/usr/src/app
+      - /Users/jeanpinzon/workspace/minha-cidade-transparente/Api:/usr/src/app
     environment:
       - NODE_ENV=dev
     command: npm install

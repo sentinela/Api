@@ -4,7 +4,7 @@ const expressConfig = () => {
   const bodyParser = require('body-parser');
 
   const enableCorsHandler = require('../middlewares').enableCorsHandler;
-  const dailyRateRoute = require('../app/dailyRate').dailyRateRoute;
+  const dailyRateRoute = require('../app/daily-rate').dailyRateRoute;
   const biddingRoute = require('../app/bidding').biddingRoute;
 
   const app = express();
