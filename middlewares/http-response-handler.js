@@ -5,9 +5,9 @@ const httpResponseHandler = (action, validator) => {
   const _intercept = (req, res, next) => {
 
     if (validator) {
-      let validation = validator.validate(req, res);
+      let validation = validator.validate(req);
       if (!validation.valid) {
-        return res.status(400).json(validation.error);
+        return res.status(400).json(new messages.BusinessError(validation.errors).values());
       }
     }
 

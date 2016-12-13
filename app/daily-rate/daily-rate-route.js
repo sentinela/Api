@@ -9,11 +9,11 @@ const dailyRateRoute = {
 
     routesHelper.post(app, '/api/v1/daily-rate', (req, res, next) => {
       return new DailyRateController().saveDailyRate(req, res, next);
-    });
+    }, saveDailyRateValidator);
 
     routesHelper.get(app, '/api/v1/daily-rate/search', (req, res, next) => {
       return new DailyRateController().searchDailyRates(req, res, next);
-    });
+    }, searchDailyRatesValidator);
   }
 };
 
