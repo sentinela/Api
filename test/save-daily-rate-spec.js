@@ -3,11 +3,16 @@ const app = require('../config').express;
 const supertest = require('supertest')(app);
 const should = require('should');
 
-beforeEach(() => {
-  // TODO: Implementar exclusão das collections quando trabalharmos com o mongo
+const MongoClient  = require('../infra').MongoClient;
+const mongoClient = new MongoClient();
+
+beforeEach((done) => {
+  mongoClient.dropDatabase().then(() => {
+    done();
+  }, done);
 });
 
-describe('##### Save daily rate #####', () => {
+describe('##### Save a daily rate #####', () => {
 
   it('# Save a daily rate must return success', (done) => {
     supertest.post('/api/v1/daily-rate')
