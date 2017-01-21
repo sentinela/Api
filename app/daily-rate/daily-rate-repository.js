@@ -3,17 +3,7 @@ const DailyRateSchema = require('./daily-rate-schema');
 class DailyRateRepository {
 
   saveDailyRate(dailyRate) {
-
-    return new Promise((resolve, reject) => {
-      new DailyRateSchema(dailyRate).save((error) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve();
-        }
-      });
-
-    });
+    return new DailyRateSchema(dailyRate).save();
   }
 
   searchDailyRates(searchParams) {

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const mongoConfig = require('../../config/mongo');
 
 const gracefulExit = () => {
-  mongoose.connection.close(() => {
+  mongoose.connection.close().then(() => {
     process.exit(0);
   });
 };
@@ -23,12 +23,7 @@ class MongoClient {
   }
 
   dropDatabase() {
-    return new Promise((resolve, reject) => {
-      mongoose.connection.db.dropDatabase(error => {
-        if (error) reject(error);
-        else resolve();
-      });
-    });
+    return mongoose.connection.db.dropDatabase();
   }
 }
 

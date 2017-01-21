@@ -14,23 +14,19 @@ const getDailyRate = (done) => {
       id: dailyRateToSave.id,
       ibgeCode: dailyRateToSave.ibgeCode
     })
-    .exec(function (error, dailyRate) {
-      if (error) {
-        done(error);
-      } else {
-        dailyRate.ibgeCode.should.equal(dailyRateToSave.ibgeCode);
-        dailyRate.id.should.equal(dailyRateToSave.id);
-        dailyRate.city.should.equal(dailyRateToSave.city);
-        dailyRate.benefited.should.equal(dailyRateToSave.benefited);
-        dailyRate.role.should.equal(dailyRateToSave.role);
-        dailyRate.empenho.should.equal(dailyRateToSave.empenho);
-        dailyRate.launchDate.should.equal(dailyRateToSave.launchDate);
-        dailyRate.value.should.equal(dailyRateToSave.value);
-        dailyRate.history.should.equal(dailyRateToSave.history);
-        dailyRate.year.should.equal(dailyRateToSave.year);
-        done();
-      }
-    });
+    .exec().then((dailyRate) => {
+      dailyRate.ibgeCode.should.equal(dailyRateToSave.ibgeCode);
+      dailyRate.id.should.equal(dailyRateToSave.id);
+      dailyRate.city.should.equal(dailyRateToSave.city);
+      dailyRate.benefited.should.equal(dailyRateToSave.benefited);
+      dailyRate.role.should.equal(dailyRateToSave.role);
+      dailyRate.empenho.should.equal(dailyRateToSave.empenho);
+      dailyRate.launchDate.should.equal(dailyRateToSave.launchDate);
+      dailyRate.value.should.equal(dailyRateToSave.value);
+      dailyRate.history.should.equal(dailyRateToSave.history);
+      dailyRate.year.should.equal(dailyRateToSave.year);
+      done();
+    }, done);
 };
 
 const dailyRateToSave = {
