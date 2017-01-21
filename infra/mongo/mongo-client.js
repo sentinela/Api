@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoConfig = require('../../config').mongo;
+const mongoConfig = require('../../config/mongo');
 
 const gracefulExit = () => {
   mongoose.connection.close(() => {

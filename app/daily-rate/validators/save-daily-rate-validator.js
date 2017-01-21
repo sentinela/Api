@@ -28,12 +28,12 @@ const _schemas = [{
   getValue: (obj) => { return (obj || {}).year; }
 }, {
   schema: Joi.required(),
-  errorMessage: resource.dailyRate.ENTITY_IS_REQUIRED,
-  getValue: (obj) => { return (obj || {}).entity; }
+  errorMessage: resource.dailyRate.CITY_IS_REQUIRED,
+  getValue: (obj) => { return (obj || {}).city; }
 }, {
   schema: Joi.string(),
-  errorMessage: resource.dailyRate.ENTITY_MUST_BE_A_STRING,
-  getValue: (obj) => { return (obj || {}).entity; }
+  errorMessage: resource.dailyRate.CITY_MUST_BE_A_STRING,
+  getValue: (obj) => { return (obj || {}).city; }
 }];
 
 const _validate = (req) => {

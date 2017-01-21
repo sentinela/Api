@@ -7,7 +7,7 @@ class DailyRateController {
   }
 
   saveDailyRate(req, res) {
-    return this._dailyRateRepository.saveDailyRate();
+    return this._dailyRateRepository.saveDailyRate(req.body.dailyRate);
   }
 
   searchDailyRates(req, res) {

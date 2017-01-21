@@ -24,11 +24,11 @@ const resource = {
       code: 'DAILY-RATE-0006',
       pt: 'O ano da diária deve ser um número'
     },
-    ENTITY_IS_REQUIRED: {
+    CITY_IS_REQUIRED: {
       code: 'DAILY-RATE-0007',
       pt: 'É obrigatório informar a entidade da diária!'
     },
-    ENTITY_MUST_BE_A_STRING: {
+    CITY_MUST_BE_A_STRING: {
       code: 'DAILY-RATE-0008',
       pt: 'A entidade da diária deve ser um texto!'
     }

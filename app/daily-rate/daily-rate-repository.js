@@ -1,8 +1,18 @@
+const DailyRateSchema = require('./daily-rate-schema');
+
 class DailyRateRepository {
 
   saveDailyRate(dailyRate) {
+
     return new Promise((resolve, reject) => {
-      resolve();
+      new DailyRateSchema(dailyRate).save((error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+
     });
   }
 
