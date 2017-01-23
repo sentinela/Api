@@ -15,17 +15,23 @@ const getDailyRate = (done) => {
       ibgeCode: dailyRateToSave.ibgeCode
     })
     .exec().then((dailyRate) => {
-      dailyRate.ibgeCode.should.equal(dailyRateToSave.ibgeCode);
-      dailyRate.id.should.equal(dailyRateToSave.id);
-      dailyRate.city.should.equal(dailyRateToSave.city);
-      dailyRate.benefited.should.equal(dailyRateToSave.benefited);
-      dailyRate.role.should.equal(dailyRateToSave.role);
-      dailyRate.empenho.should.equal(dailyRateToSave.empenho);
-      dailyRate.launchDate.should.equal(dailyRateToSave.launchDate);
-      dailyRate.value.should.equal(dailyRateToSave.value);
-      dailyRate.history.should.equal(dailyRateToSave.history);
-      dailyRate.year.should.equal(dailyRateToSave.year);
-      done();
+      try {
+        should(dailyRate).not.equal(null);
+        should(dailyRate).not.equal(undefined);
+        dailyRate.ibgeCode.should.equal(dailyRateToSave.ibgeCode);
+        dailyRate.id.should.equal(dailyRateToSave.id);
+        dailyRate.city.should.equal(dailyRateToSave.city);
+        dailyRate.benefited.should.equal(dailyRateToSave.benefited);
+        dailyRate.role.should.equal(dailyRateToSave.role);
+        dailyRate.empenho.should.equal(dailyRateToSave.empenho);
+        dailyRate.launchDate.should.equal(dailyRateToSave.launchDate);
+        dailyRate.value.should.equal(dailyRateToSave.value);
+        dailyRate.history.should.equal(dailyRateToSave.history);
+        dailyRate.year.should.equal(dailyRateToSave.year);
+        done();
+      } catch (e) {
+        done(e);
+      }
     }, done);
 };
 
@@ -73,19 +79,20 @@ describe('##### Save a daily rate #####', () => {
           'DAILY-RATE-0001',
           'DAILY-RATE-0003',
           'DAILY-RATE-0005',
-          'DAILY-RATE-0007'
+          'DAILY-RATE-0007',
+          'DAILY-RATE-0009',
+          'DAILY-RATE-0011'
         ]);
         done();
       });
   });
 
-  it('# Save a daily rate without a daily rate value must return bad request', (done) => {
+  it('# Save a daily rate without a  value must return bad request', (done) => {
     supertest.post('/api/v1/daily-rate')
       .send({
-        dailyRate: {
-          year: 2016,
-          city: 'test'
-        }
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          value: undefined
+        })
       })
       .end((error, result) => {
         should.not.exist(error);
@@ -99,14 +106,12 @@ describe('##### Save a daily rate #####', () => {
       });
   });
 
-  it('# Save a daily rate with a invalid daily rate value must return bad request', (done) => {
+  it('# Save a daily rate with a invalid value must return bad request', (done) => {
     supertest.post('/api/v1/daily-rate')
       .send({
-        dailyRate: {
-          year: 2016,
-          value: true,
-          city: 'test'
-        }
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          value: -1
+        })
       })
       .end((error, result) => {
         should.not.exist(error);
@@ -120,13 +125,12 @@ describe('##### Save a daily rate #####', () => {
       });
   });
 
-  it('# Save a daily rate without a daily rate year must return bad request', (done) => {
+  it('# Save a daily rate without a ibge code must return bad request', (done) => {
     supertest.post('/api/v1/daily-rate')
       .send({
-        dailyRate: {
-          value: 123.123,
-          city: 'test'
-        }
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          ibgeCode: undefined
+        })
       })
       .end((error, result) => {
         should.not.exist(error);
@@ -140,14 +144,12 @@ describe('##### Save a daily rate #####', () => {
       });
   });
 
-  it('# Save a daily rate with a invalid daily rate year must return bad request', (done) => {
+  it('# Save a daily rate with a invalid ibge code must return bad request', (done) => {
     supertest.post('/api/v1/daily-rate')
       .send({
-        dailyRate: {
-          year: 'qwe',
-          value: 123.123,
-          city: 'test'
-        }
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          ibgeCode: -1
+        })
       })
       .end((error, result) => {
         should.not.exist(error);
@@ -161,13 +163,12 @@ describe('##### Save a daily rate #####', () => {
       });
   });
 
-  it('# Save a daily rate without a daily rate city must return bad request', (done) => {
+  it('# Save a daily rate without a identifier must return bad request', (done) => {
     supertest.post('/api/v1/daily-rate')
       .send({
-        dailyRate: {
-          year: 2016,
-          value: 123.123
-        }
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          id: undefined
+        })
       })
       .end((error, result) => {
         should.not.exist(error);
@@ -181,14 +182,12 @@ describe('##### Save a daily rate #####', () => {
       });
   });
 
-  it('# Save a daily rate with a invalid daily city value must return bad request', (done) => {
+  it('# Save a daily rate with a invalid  identifier must return bad request', (done) => {
     supertest.post('/api/v1/daily-rate')
       .send({
-        dailyRate: {
-          year: 2016,
-          value: 123.123,
-          city: 123
-        }
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          id: -1
+        })
       })
       .end((error, result) => {
         should.not.exist(error);
@@ -197,6 +196,82 @@ describe('##### Save a daily rate #####', () => {
         result.body.valid.should.equal(false);
         result.body.messages.should.haveSameMessages([
           'DAILY-RATE-0008'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate without a  year must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          year: undefined
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.equal(400);
+        result.body.valid.should.equal(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0009'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate with a invalid  year must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          year: 1899
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.equal(400);
+        result.body.valid.should.equal(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0010'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate without a  city must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          city: undefined
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.equal(400);
+        result.body.valid.should.equal(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0011'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate with a invalid daily city value must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          city: true
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.equal(400);
+        result.body.valid.should.equal(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0012'
         ]);
         done();
       });

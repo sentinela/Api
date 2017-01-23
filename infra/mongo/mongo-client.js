@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const mongoConfig = require('../../config/mongo');
 
+mongoose.Promise = require('bluebird');
+
 const gracefulExit = () => {
   mongoose.connection.close().then(() => {
     process.exit(0);

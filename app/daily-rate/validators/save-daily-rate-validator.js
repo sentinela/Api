@@ -12,19 +12,35 @@ const _schemas = [{
   getValue: (obj) => { return obj; }
 }, {
   schema: Joi.required(),
+  errorMessage: resource.dailyRate.IBGE_CODE_IS_REQUIRED,
+  getValue: (obj) => { return (obj || {}).ibgeCode; }
+}, {
+  schema: Joi.number().integer().min(0),
+  errorMessage: resource.dailyRate.IBGE_CODE_MUST_BE_AN_INTEGER_BIGGER_THAN_ZERO,
+  getValue: (obj) => { return (obj || {}).ibgeCode; }
+}, {
+  schema: Joi.required(),
+  errorMessage: resource.dailyRate.ID_IS_REQUIRED,
+  getValue: (obj) => { return (obj || {}).id; }
+}, {
+  schema: Joi.number().integer().min(0),
+  errorMessage: resource.dailyRate.ID_MUST_BE_AN_INTEGER_BIGGER_THAN_ZERO,
+  getValue: (obj) => { return (obj || {}).id; }
+}, {
+  schema: Joi.required(),
   errorMessage: resource.dailyRate.VALUE_IS_REQUIRED,
   getValue: (obj) => { return (obj || {}).value; }
 }, {
-  schema: Joi.number(),
-  errorMessage: resource.dailyRate.VALUE_MUST_BE_A_NUMBER,
+  schema: Joi.number().min(0),
+  errorMessage: resource.dailyRate.VALUE_MUST_BE_A_NUMBER_BIGGER_THAN_ZERO,
   getValue: (obj) => { return (obj || {}).value; }
 }, {
   schema: Joi.required(),
   errorMessage: resource.dailyRate.YEAR_IS_REQUIRED,
   getValue: (obj) => { return (obj || {}).year; }
 }, {
-  schema: Joi.number(),
-  errorMessage: resource.dailyRate.YEAR_MUST_BE_A_NUMBER,
+  schema: Joi.number().integer().min(1900),
+  errorMessage: resource.dailyRate.YEAR_MUST_BE_AN_INTEGER_BIGGER_THAN_1900,
   getValue: (obj) => { return (obj || {}).year; }
 }, {
   schema: Joi.required(),
