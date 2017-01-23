@@ -1,5 +1,5 @@
-const messageType = require('./messageType');
-const Message = require('./Message');
+const messageType = require('./message-type');
+const Message = require('./message');
 
 class Success extends Message {
   constructor(messages) {

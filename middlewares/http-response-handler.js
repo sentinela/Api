@@ -19,13 +19,18 @@ const httpResponseHandler = (action, validator) => {
       }
     }, (error) => {
       if (error) {
+
+        if (error.values) {
+          error = error.values();
+        }
+
         switch (error.type) {
           case messages.messageType.businessError:
-            return res.status(400).json(result.values());
+            return res.status(400).json(error);
           case messages.messageType.applicationError:
-            return res.status(500).json(result.values());
+            return res.status(500).json(error);
           case messages.messageType.unauthorised:
-            return res.status(401).json(result.values());
+            return res.status(401).json(error);
           default:
             break;
         }

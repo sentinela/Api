@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  var messageType = require('./messageType');
-  var Message = require('./Message');
+  var messageType = require('./message-type');
+  var Message = require('./message');
 
   class ApplicationError extends Message {
 

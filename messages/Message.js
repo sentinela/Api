@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const messageType = require('./messageType');
+  const messageType = require('./message-type');
 
   class Message {
 
@@ -15,6 +15,7 @@
       return {
         valid: this._type === messageType.success,
         data: this._data,
+        type: this._type,
         messages: this._messages
       };
     }

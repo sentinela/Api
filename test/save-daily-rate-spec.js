@@ -7,8 +7,9 @@ const MongoClient  = require('../infra').MongoClient;
 const mongoClient = new MongoClient();
 
 const DailyRateSchema = require('../app/daily-rate').DailyRateSchema;
+const DailyRateRepository = require('../app/daily-rate').DailyRateRepository;
 
-const getDailyRate = (done) => {
+const dailyRateWasCorrectlySaved = (done) => {
   DailyRateSchema
     .findOne({
       id: dailyRateToSave.id,
@@ -33,6 +34,10 @@ const getDailyRate = (done) => {
         done(e);
       }
     }, done);
+};
+
+const saveDailyRate = (dailyRate) => {
+  return new DailyRateRepository().saveDailyRate(dailyRate);
 };
 
 const dailyRateToSave = {
@@ -64,8 +69,26 @@ describe('##### Save a daily rate #####', () => {
         should.exist(result);
         result.status.should.equal(200);
         result.body.valid.should.equal(true);
-        getDailyRate(done);
+        dailyRateWasCorrectlySaved(done);
       });
+  });
+
+  it('# Save a duplicated daily rate must return bad request', (done) => {
+
+    saveDailyRate(dailyRateToSave).then(() => {
+      supertest.post('/api/v1/daily-rate')
+        .send({ dailyRate: dailyRateToSave })
+        .end((error, result) => {
+          should.not.exist(error);
+          should.exist(result);
+          result.status.should.equal(400);
+          result.body.valid.should.equal(false);
+          result.body.messages.should.haveSameMessages([
+            'DAILY-RATE-0013'
+          ]);
+          done();
+        });
+    }, done);
   });
 
   it('# Save a daily rate without a daily rate object must return bad request', (done) => {
