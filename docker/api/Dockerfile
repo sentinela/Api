@@ -1,6 +1,6 @@
 FROM node
 
-WORKDIR /usr/src/app/src
+WORKDIR /usr/src/app
 
 EXPOSE 80
 

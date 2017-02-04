@@ -3,4 +3,4 @@ docker run --rm -it \
 -v /Users/jeanpinzon/workspace/minha-cidade-transparente/Api:/usr/src/app \
 -e NODE_ENV='test' \
 --name minha-cidade-transparente-api \
-minha-cidade-transparente/api npm test
+minhacidadetransparente/api npm test

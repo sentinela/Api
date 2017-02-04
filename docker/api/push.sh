@@ -1,1 +1,1 @@
-docker push minha-cidade-transparente/api
+docker push minhacidadetransparente/api

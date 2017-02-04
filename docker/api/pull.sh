@@ -1,1 +1,1 @@
-docker pull minha-cidade-transparente/api
+docker pull minhacidadetransparente/api

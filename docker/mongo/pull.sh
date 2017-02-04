@@ -1,1 +1,1 @@
-docker pull minha-cidade-transparente/mongo
+docker pull minhacidadetransparente/mongo

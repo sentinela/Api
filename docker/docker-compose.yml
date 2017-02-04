@@ -3,10 +3,10 @@ version: '2'
 services:
 
   mongo:
-    image: minha-cidade-transparente/mongo
+    image: minhacidadetransparente/mongo
 
-  security-api:
-    image: minha-cidade-transparente/api
+  api:
+    image: minhacidadetransparente/api
     ports:
       - "8001:80"
     depends_on:

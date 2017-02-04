@@ -1,1 +1,1 @@
-docker build -t minha-cidade-transparente/mongo .
+docker build -t minhacidadetransparente/mongo .

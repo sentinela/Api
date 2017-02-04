@@ -1,1 +1,1 @@
-docker push minha-cidade-transparente/mongo
+docker push minhacidadetransparente/mongo

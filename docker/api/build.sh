@@ -1,1 +1,1 @@
-docker build -t minha-cidade-transparente/api .
+docker build -t minhacidadetransparente/api .
