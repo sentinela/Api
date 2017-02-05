@@ -5,7 +5,6 @@ const expressConfig = () => {
 
   const enableCorsHandler = require('../middlewares').enableCorsHandler;
   const dailyRateRoute = require('../app/daily-rate').dailyRateRoute;
-  const biddingRoute = require('../app/bidding').biddingRoute;
 
   const app = express();
 
@@ -14,7 +13,6 @@ const expressConfig = () => {
   app.use(enableCorsHandler);
 
   dailyRateRoute.config(app);
-  biddingRoute.config(app);
 
   return app;
 };

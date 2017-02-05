@@ -42,15 +42,57 @@ const resource = {
     },
     CITY_IS_REQUIRED: {
       code: 'DAILY-RATE-0011',
-      pt: 'É obrigatório informar a entidade da diária!'
+      pt: 'É obrigatório informar a cidade da diária!'
     },
     CITY_MUST_BE_A_STRING: {
       code: 'DAILY-RATE-0012',
-      pt: 'A entidade da diária deve ser um texto!'
+      pt: 'A cidade da diária deve ser um texto!'
     },
     ALREADY_EXIST_A_DAILY_RATE_WITH_THIS_ID_AND_IBGE_CODE: {
       code: 'DAILY-RATE-0013',
       pt: 'A entidade da diária deve ser um texto!'
+    },
+    HISTORY_IS_REQUIRED: {
+      code: 'DAILY-RATE-0014',
+      // todo: O que seria 'history' nesse contexto?
+      pt: 'É obrigatório informar a history da diária!'
+    },
+    HISTORY_MUST_BE_A_STRING: {
+      code: 'DAILY-RATE-0015',
+      // todo: O que seria 'history' nesse contexto?
+      pt: 'A history da diária deve ser um texto!'
+    },
+    LAUNCH_DATE_IS_REQUIRED: {
+      code: 'DAILY-RATE-0016',
+      pt: 'É obrigatório informar a data da diária!'
+    },
+    LAUNCH_DATE_MUST_BE_A_DATE: {
+      code: 'DAILY-RATE-0017',
+      pt: 'A data da diária deve ser uma data!'
+    },
+    BENEFITED_IS_REQUIRED: {
+      code: 'DAILY-RATE-0018',
+      pt: 'É obrigatório informar o credor da diária!'
+    },
+    BENEFITED_MUST_BE_A_STRING: {
+      code: 'DAILY-RATE-0019',
+      pt: 'O credor da diária deve ser um texto!'
+    },
+    ROLE_IS_REQUIRED: {
+      code: 'DAILY-RATE-0020',
+      pt: 'É obrigatório informar o cargo da diária!'
+    },
+    ROLE_MUST_BE_A_STRING: {
+      code: 'DAILY-RATE-0021',
+      pt: 'O cargo da diária deve ser um texto!'
+    },
+    EMPENHO_IS_REQUIRED: {
+      code: 'DAILY-RATE-0022',
+      pt: 'É obrigatório informar o empenho da diária!'
+    },
+    EMPENHO_MUST_BE_A_STRING: {
+      code: 'DAILY-RATE-0023',
+      pt: 'O empenho da diária deve ser um texto!'
     }
   }
 };

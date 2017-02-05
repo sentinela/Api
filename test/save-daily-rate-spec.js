@@ -17,18 +17,18 @@ const dailyRateWasCorrectlySaved = (done) => {
     })
     .exec().then((dailyRate) => {
       try {
-        should(dailyRate).not.equal(null);
-        should(dailyRate).not.equal(undefined);
-        dailyRate.ibgeCode.should.equal(dailyRateToSave.ibgeCode);
-        dailyRate.id.should.equal(dailyRateToSave.id);
-        dailyRate.city.should.equal(dailyRateToSave.city);
-        dailyRate.benefited.should.equal(dailyRateToSave.benefited);
-        dailyRate.role.should.equal(dailyRateToSave.role);
-        dailyRate.empenho.should.equal(dailyRateToSave.empenho);
-        dailyRate.launchDate.should.equal(dailyRateToSave.launchDate);
-        dailyRate.value.should.equal(dailyRateToSave.value);
-        dailyRate.history.should.equal(dailyRateToSave.history);
-        dailyRate.year.should.equal(dailyRateToSave.year);
+        should(dailyRate).not.eql(null);
+        should(dailyRate).not.eql(undefined);
+        dailyRate.ibgeCode.should.eql(dailyRateToSave.ibgeCode);
+        dailyRate.id.should.eql(dailyRateToSave.id);
+        dailyRate.city.should.eql(dailyRateToSave.city);
+        dailyRate.benefited.should.eql(dailyRateToSave.benefited);
+        dailyRate.role.should.eql(dailyRateToSave.role);
+        dailyRate.empenho.should.eql(dailyRateToSave.empenho);
+        dailyRate.launchDate.should.eql(dailyRateToSave.launchDate);
+        dailyRate.value.should.eql(dailyRateToSave.value);
+        dailyRate.history.should.eql(dailyRateToSave.history);
+        dailyRate.year.should.eql(dailyRateToSave.year);
         done();
       } catch (e) {
         done(e);
@@ -47,7 +47,7 @@ const dailyRateToSave = {
 	benefited: 'ADAO DE CASTRO JUNIOR',
 	role: 'SECRETÁRIO MUNICIPAL',
 	empenho: '20862/2016',
- 	launchDate: '2016-11-18',
+ 	launchDate: new Date(),
   value: 653.03,
 	history: 'Diárias para participar de audiência na Agência Nacional de Transportes Terrestres',
   year: 2016
@@ -67,8 +67,8 @@ describe('##### Save a daily rate #####', () => {
       .end((error, result) => {
         should.not.exist(error);
         should.exist(result);
-        result.status.should.equal(200);
-        result.body.valid.should.equal(true);
+        result.status.should.eql(200);
+        result.body.valid.should.eql(true);
         dailyRateWasCorrectlySaved(done);
       });
   });
@@ -81,8 +81,8 @@ describe('##### Save a daily rate #####', () => {
         .end((error, result) => {
           should.not.exist(error);
           should.exist(result);
-          result.status.should.equal(400);
-          result.body.valid.should.equal(false);
+          result.status.should.eql(400);
+          result.body.valid.should.eql(false);
           result.body.messages.should.haveSameMessages([
             'DAILY-RATE-0013'
           ]);
@@ -96,21 +96,26 @@ describe('##### Save a daily rate #####', () => {
       .end((error, result) => {
         should.not.exist(error);
         should.exist(result);
-        result.status.should.equal(400);
-        result.body.valid.should.equal(false);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
         result.body.messages.should.haveSameMessages([
           'DAILY-RATE-0001',
           'DAILY-RATE-0003',
           'DAILY-RATE-0005',
           'DAILY-RATE-0007',
           'DAILY-RATE-0009',
-          'DAILY-RATE-0011'
+          'DAILY-RATE-0011',
+          'DAILY-RATE-0014',
+          'DAILY-RATE-0016',
+          'DAILY-RATE-0018',
+          'DAILY-RATE-0020',
+          'DAILY-RATE-0022'
         ]);
         done();
       });
   });
 
-  it('# Save a daily rate without a  value must return bad request', (done) => {
+  it('# Save a daily rate without a value must return bad request', (done) => {
     supertest.post('/api/v1/daily-rate')
       .send({
         dailyRate: Object.assign({}, dailyRateToSave, {
@@ -120,8 +125,8 @@ describe('##### Save a daily rate #####', () => {
       .end((error, result) => {
         should.not.exist(error);
         should.exist(result);
-        result.status.should.equal(400);
-        result.body.valid.should.equal(false);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
         result.body.messages.should.haveSameMessages([
           'DAILY-RATE-0003'
         ]);
@@ -139,8 +144,8 @@ describe('##### Save a daily rate #####', () => {
       .end((error, result) => {
         should.not.exist(error);
         should.exist(result);
-        result.status.should.equal(400);
-        result.body.valid.should.equal(false);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
         result.body.messages.should.haveSameMessages([
           'DAILY-RATE-0004'
         ]);
@@ -158,8 +163,8 @@ describe('##### Save a daily rate #####', () => {
       .end((error, result) => {
         should.not.exist(error);
         should.exist(result);
-        result.status.should.equal(400);
-        result.body.valid.should.equal(false);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
         result.body.messages.should.haveSameMessages([
           'DAILY-RATE-0005'
         ]);
@@ -177,8 +182,8 @@ describe('##### Save a daily rate #####', () => {
       .end((error, result) => {
         should.not.exist(error);
         should.exist(result);
-        result.status.should.equal(400);
-        result.body.valid.should.equal(false);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
         result.body.messages.should.haveSameMessages([
           'DAILY-RATE-0006'
         ]);
@@ -196,8 +201,8 @@ describe('##### Save a daily rate #####', () => {
       .end((error, result) => {
         should.not.exist(error);
         should.exist(result);
-        result.status.should.equal(400);
-        result.body.valid.should.equal(false);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
         result.body.messages.should.haveSameMessages([
           'DAILY-RATE-0007'
         ]);
@@ -205,7 +210,7 @@ describe('##### Save a daily rate #####', () => {
       });
   });
 
-  it('# Save a daily rate with a invalid  identifier must return bad request', (done) => {
+  it('# Save a daily rate with a invalid identifier must return bad request', (done) => {
     supertest.post('/api/v1/daily-rate')
       .send({
         dailyRate: Object.assign({}, dailyRateToSave, {
@@ -215,8 +220,8 @@ describe('##### Save a daily rate #####', () => {
       .end((error, result) => {
         should.not.exist(error);
         should.exist(result);
-        result.status.should.equal(400);
-        result.body.valid.should.equal(false);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
         result.body.messages.should.haveSameMessages([
           'DAILY-RATE-0008'
         ]);
@@ -224,7 +229,7 @@ describe('##### Save a daily rate #####', () => {
       });
   });
 
-  it('# Save a daily rate without a  year must return bad request', (done) => {
+  it('# Save a daily rate without a year must return bad request', (done) => {
     supertest.post('/api/v1/daily-rate')
       .send({
         dailyRate: Object.assign({}, dailyRateToSave, {
@@ -234,8 +239,8 @@ describe('##### Save a daily rate #####', () => {
       .end((error, result) => {
         should.not.exist(error);
         should.exist(result);
-        result.status.should.equal(400);
-        result.body.valid.should.equal(false);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
         result.body.messages.should.haveSameMessages([
           'DAILY-RATE-0009'
         ]);
@@ -243,7 +248,7 @@ describe('##### Save a daily rate #####', () => {
       });
   });
 
-  it('# Save a daily rate with a invalid  year must return bad request', (done) => {
+  it('# Save a daily rate with a invalid year must return bad request', (done) => {
     supertest.post('/api/v1/daily-rate')
       .send({
         dailyRate: Object.assign({}, dailyRateToSave, {
@@ -253,8 +258,8 @@ describe('##### Save a daily rate #####', () => {
       .end((error, result) => {
         should.not.exist(error);
         should.exist(result);
-        result.status.should.equal(400);
-        result.body.valid.should.equal(false);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
         result.body.messages.should.haveSameMessages([
           'DAILY-RATE-0010'
         ]);
@@ -262,7 +267,7 @@ describe('##### Save a daily rate #####', () => {
       });
   });
 
-  it('# Save a daily rate without a  city must return bad request', (done) => {
+  it('# Save a daily rate without a city must return bad request', (done) => {
     supertest.post('/api/v1/daily-rate')
       .send({
         dailyRate: Object.assign({}, dailyRateToSave, {
@@ -272,10 +277,200 @@ describe('##### Save a daily rate #####', () => {
       .end((error, result) => {
         should.not.exist(error);
         should.exist(result);
-        result.status.should.equal(400);
-        result.body.valid.should.equal(false);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
         result.body.messages.should.haveSameMessages([
           'DAILY-RATE-0011'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate with a invalid history must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          history: false
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0015'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate without a history must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          history: undefined
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0014'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate with a invalid launch date must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          launchDate: false
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0017'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate without a launch date must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          launchDate: undefined
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0016'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate with a invalid benefited must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          benefited: false
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0019'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate without a benefited must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          benefited: undefined
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0018'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate with a invalid role must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          role: false
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0021'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate without a role must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          role: undefined
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0020'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate with a empenho role must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          empenho: false
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0023'
+        ]);
+        done();
+      });
+  });
+
+  it('# Save a daily rate without an empenho must return bad request', (done) => {
+    supertest.post('/api/v1/daily-rate')
+      .send({
+        dailyRate: Object.assign({}, dailyRateToSave, {
+          empenho: undefined
+        })
+      })
+      .end((error, result) => {
+        should.not.exist(error);
+        should.exist(result);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
+        result.body.messages.should.haveSameMessages([
+          'DAILY-RATE-0022'
         ]);
         done();
       });
@@ -291,8 +486,8 @@ describe('##### Save a daily rate #####', () => {
       .end((error, result) => {
         should.not.exist(error);
         should.exist(result);
-        result.status.should.equal(400);
-        result.body.valid.should.equal(false);
+        result.status.should.eql(400);
+        result.body.valid.should.eql(false);
         result.body.messages.should.haveSameMessages([
           'DAILY-RATE-0012'
         ]);

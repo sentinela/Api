@@ -22,12 +22,13 @@ const DailyRateSchema = mongoConnection.Schema({
     type: String,
     required: true
   },
+  // todo: Pesquisar tradução
 	empenho: {
     type: String,
     required: true
   },
  	launchDate: {
-    type: String,
+    type: Date,
     required: true
   },
   value: {

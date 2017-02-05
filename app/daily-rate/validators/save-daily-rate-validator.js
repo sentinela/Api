@@ -50,6 +50,46 @@ const _schemas = [{
   schema: Joi.string(),
   errorMessage: resource.dailyRate.CITY_MUST_BE_A_STRING,
   getValue: (obj) => { return (obj || {}).city; }
+}, {
+  schema: Joi.required(),
+  errorMessage: resource.dailyRate.HISTORY_IS_REQUIRED,
+  getValue: (obj) => { return (obj || {}).history; }
+}, {
+  schema: Joi.string(),
+  errorMessage: resource.dailyRate.HISTORY_MUST_BE_A_STRING,
+  getValue: (obj) => { return (obj || {}).history; }
+}, {
+  schema: Joi.required(),
+  errorMessage: resource.dailyRate.LAUNCH_DATE_IS_REQUIRED,
+  getValue: (obj) => { return (obj || {}).launchDate; }
+}, {
+  schema: Joi.string(),
+  errorMessage: resource.dailyRate.LAUNCH_DATE_MUST_BE_A_DATE,
+  getValue: (obj) => { return (obj || {}).launchDate; }
+}, {
+  schema: Joi.required(),
+  errorMessage: resource.dailyRate.BENEFITED_IS_REQUIRED,
+  getValue: (obj) => { return (obj || {}).benefited; }
+}, {
+  schema: Joi.string(),
+  errorMessage: resource.dailyRate.BENEFITED_MUST_BE_A_STRING,
+  getValue: (obj) => { return (obj || {}).benefited; }
+}, {
+  schema: Joi.required(),
+  errorMessage: resource.dailyRate.ROLE_IS_REQUIRED,
+  getValue: (obj) => { return (obj || {}).role; }
+}, {
+  schema: Joi.string(),
+  errorMessage: resource.dailyRate.ROLE_MUST_BE_A_STRING,
+  getValue: (obj) => { return (obj || {}).role; }
+}, {
+  schema: Joi.required(),
+  errorMessage: resource.dailyRate.EMPENHO_IS_REQUIRED,
+  getValue: (obj) => { return (obj || {}).empenho; }
+}, {
+  schema: Joi.string(),
+  errorMessage: resource.dailyRate.EMPENHO_MUST_BE_A_STRING,
+  getValue: (obj) => { return (obj || {}).empenho; }
 }];
 
 const _validate = (req) => {
