@@ -18,6 +18,7 @@ const httpResponseHandler = (action, validator) => {
         return res.status(200).json(new messages.Success(result).values());
       }
     }, (error) => {
+
       if (error) {
 
         if (error.values) {
@@ -34,8 +35,10 @@ const httpResponseHandler = (action, validator) => {
           default:
             break;
         }
+      } else {
+        return res.status(500).json(new messages.ApplicationError().values());
       }
-      return res.status(500).json(new messages.ApplicationError().values());
+
     });
   };
 

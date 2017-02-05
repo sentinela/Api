@@ -9,19 +9,19 @@ const routesHelper = {
   },
 
   get: (app, route, action, validator) => {
-    app.route(route).post(httpResponseHandler((req, res, next) => {
+    app.route(route).get(httpResponseHandler((req, res, next) => {
       return action(req, res, next);
     }, validator).intercept);
   },
 
   put: (app, route, action, validator) => {
-    app.route(route).post(httpResponseHandler((req, res, next) => {
+    app.route(route).put(httpResponseHandler((req, res, next) => {
       return action(req, res, next);
     }, validator).intercept);
   },
 
   delete: (app, route, action, validator) => {
-    app.route(route).post(httpResponseHandler((req, res, next) => {
+    app.route(route).delete(httpResponseHandler((req, res, next) => {
       return action(req, res, next);
     }, validator).intercept);
   }

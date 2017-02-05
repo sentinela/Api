@@ -1,6 +1,7 @@
 const DailyRateSchema = require('./daily-rate-schema');
 const resource = require('../../config/resource');
 const BusinessError = require('../../messages').BusinessError;
+const Success = require('../../messages').Success;
 
 class DailyRateRepository {
 
@@ -30,7 +31,9 @@ class DailyRateRepository {
 
   searchDailyRates(searchParams) {
     return new Promise((resolve, reject) => {
-      resolve();
+      DailyRateSchema.find({}).then((dailyRates) => {
+        resolve(new Success().withData({ dailyRates: dailyRates || [] }));
+      }, reject);
     });
   }
 

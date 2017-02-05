@@ -11,12 +11,32 @@
       this._data = data;
     }
 
+    get data() {
+      return this._data;
+    }
+
+    set data(value) {
+      this._data = value;
+    }
+
+    get valid() {
+      return this._type === messageType.success;
+    }
+
+    get messages() {
+      return this._messages;
+    }
+
+    get type() {
+      return this._type;
+    }
+
     values() {
       return {
-        valid: this._type === messageType.success,
-        data: this._data,
-        type: this._type,
-        messages: this._messages
+        valid: this.valid,
+        data: this.data,
+        type: this.type,
+        messages: this.messages
       };
     }
   }
